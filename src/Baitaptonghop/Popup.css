@@ -1,8 +1,10 @@
 .openModal{
+    transform: translateY(100);
+    transition:all 1s ease-in-out;
     opacity: 1;
-    display: block;
 }
 .closeModal{
-    display: none;
+    transform: translateY(-100%);
     opacity: 0;
+    transition: all 1s ease-in-out;
 }

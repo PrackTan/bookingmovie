@@ -55,10 +55,11 @@ export default function BaiTapTongHop() {
   const dataUnique = _.unionBy(data, "maDanhMuc");
 
   const [maDanhmuc, setMadanhMuc] = useState(dataUnique[0].maDanhMuc);
-  const [openModal,setOpenModal] = useState(false)
+  const [openModal,setOpenModal] = useState(false);
+  const [item, setItem] =  useState({})
   return (
     <div className=''>
-      <ModalBaiTapTongHop openModal={openModal}/>
+      <ModalBaiTapTongHop openModal={openModal} setOpenModal={setOpenModal} item={item}/>
       <div className="grid grid-cols-8">
         <div className="h-full p-3 space-y-2 col-span-2 dark:bg-gray-50 dark:text-gray-800">
           <div className="flex items-center p-2 space-x-4">
@@ -83,6 +84,7 @@ export default function BaiTapTongHop() {
           <div className="divide-y dark:divide-gray-300">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
               {dataUnique.map((item: any, index: number) => {
+                const classActive  = ['flex','items-center p-2','space-x-3','rounded-md',maDanhmuc === dataUnique.maDanhMuc?'bg-black text-white':' ']
                 return (
                   <li
                     key={index}
@@ -94,7 +96,7 @@ export default function BaiTapTongHop() {
                     <a
                       rel="noopener noreferrer"
                       href="#"
-                      className="flex items-center p-2 space-x-3 rounded-md"
+                      className={classActive.join(' ')}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +175,11 @@ export default function BaiTapTongHop() {
                           </h1>
                           <p>Giá: {item.gia} USD</p>
                           <div className="flex items-center flex-wrap ">
-                            <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
+                            <a onClick={()=>{
+                              setOpenModal(true)
+                              setItem(item)  
+                            }} 
+                              className="text-indigo-500 inline-flex hover:cursor-pointer items-center md:mb-2 lg:mb-0">
                               Learn More
                               <svg
                                 className="w-4 h-4 ml-2"

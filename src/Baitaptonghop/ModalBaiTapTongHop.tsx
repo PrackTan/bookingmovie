@@ -1,10 +1,12 @@
+import _ from 'lodash';
 import React from 'react'
-
+import './Popup.css'
 export default function modalBaiTapTongHop(props) {
-    const {openModal} = props
+    const {openModal,setOpenModal,item} = props
+    const classModal = ['relative','z-10',openModal?'openModal':'closeModal']
   return (
     <div
-      className="relative z-10"
+      className={_.join(classModal,' ')}
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -56,13 +58,11 @@ Leaving: "ease-in duration-200"
                     className="text-base font-semibold leading-6 text-gray-900"
                     id="modal-title"
                   >
-                    Deactivate account
+                    {item.tenMonAn}
                   </h3>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Are you sure you want to deactivate your account? All of
-                      your data will be permanently removed. This action cannot
-                      be undone.
+                     <img src={item.hinhAnh} className='w-100' alt={item.tenMonAn}/>
                     </p>
                   </div>
                 </div>
@@ -76,6 +76,7 @@ Leaving: "ease-in duration-200"
                 Deactivate
               </button>
               <button
+                onClick={()=>{setOpenModal(false)}}
                 type="button"
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
               >
